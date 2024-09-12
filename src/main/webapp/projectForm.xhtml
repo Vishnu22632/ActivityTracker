@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>TMS - Project Form</title>
+    </h:head>
+    <h:body>
+
+        <ui:include src="menu.xhtml"/>
+
+
+        <div class="main-container" style="display: flex;
+             width: 100%;">
+
+
+            <ui:include src="panelmenu.xhtml" />
+
+
+            <p:card style="width: 80%;"> 
+
+                <!-- Add New Project -->
+
+                <h:form id="projectForm">
+                    <p:fieldset legend="Project Details" style="padding:20px;">
+                        <h:panelGrid columns="2" cellpadding="5">
+                            <h:outputLabel for="name" value="Project Name:" />
+                            <p:inputText id="name" size="30" value="#{projectBean.project.name}" required="true" />
+
+                            <h:outputLabel for="status" value="Status:" />
+                            <p:selectOneMenu id="status" value="#{projectBean.project.status}">
+                                <f:selectItem itemLabel="Select Status" itemValue="" />
+                                <f:selectItem itemLabel="On-going" itemValue="On-going" />
+                                <f:selectItem itemLabel="Pending" itemValue="Pending" />
+                                <f:selectItem itemLabel="Completed" itemValue="Completed" />
+                            </p:selectOneMenu>
+
+                            <h:outputLabel for="startDate" value="Start Date:" />
+                            <p:calendar size="30" id="startDate" autocomplete="off" value="#{projectBean.project.startDate}" pattern="MM/dd/yyyy" />
+
+                            <h:outputLabel for="endDate" value="End Date:" />
+                            <p:calendar size="30" id="endDate" autocomplete="off" value="#{projectBean.project.endDate}" pattern="MM/dd/yyyy" />
+
+                            <h:outputLabel for="manager" value="Project Manager:" />
+                            <p:inputText size="30" id="manager" value="#{projectBean.project.manager}" required="true" />
+
+                            <h:outputLabel for="teamMembers" value="Team Members:" />
+                            <p:inputText size="30" id="teamMembers" value="#{projectBean.project.teamMembers}" />
+
+                            <h:outputLabel for="description" value="Description:" />
+                            <p:inputTextarea cols="32" id="description" value="#{projectBean.project.description}" />
+                        </h:panelGrid>
+                    </p:fieldset>
+
+
+                    <p:commandButton value="Add Project" action="#{projectBean.saveProject}" />
+                    <p:commandButton value="Reset"  type="reset" styleClass="ui-button-danger mr-2" />
+
+                </h:form>
+
+            </p:card>
+
+        </div>
+
+    </h:body>
+</html>

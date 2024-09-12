@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <title>User Form</title>
+</h:head>
+<h:body>
+    <h:form>
+        <h:panelGrid columns="2" cellpadding="5">
+            <h:outputLabel for="name" value="Name:" />
+            <p:inputText id="name" value="#{userBean.user.name}" required="true" />
+
+            <h:outputLabel for="email" value="Email:" />
+            <p:inputText id="email" value="#{userBean.user.email}" required="true" />
+
+            <h:outputLabel for="password" value="Password:" />
+            <p:password id="password" value="#{userBean.user.password}" required="true" />
+
+            <f:facet name="footer">
+                <p:commandButton value="Save" action="#{userBean.createUser}" />
+                <p:commandButton value="Update" action="#{userBean.updateUser}" />
+            </f:facet>
+        </h:panelGrid>
+    </h:form>
+</h:body>
+</html>
+
+
+
+
+
+
+*****************************************
+<!-- Project Form Dialog -->
+                <p:dialog header="Add New Project" widgetVar="projectDialog" modal="true" width="600px" responsive="true">
+                    <p:fieldset legend="Project Details" style="padding:20px;">
+                        <h:panelGrid columns="2" cellpadding="5">
+                            <h:outputLabel for="name" value="Project Name:" />
+                            <p:inputText id="name" size="30" value="#{projectBean.project.name}" required="true" />
+
+                            <h:outputLabel for="status" value="Status:" />
+                            <p:selectOneMenu  id="status" value="#{projectBean.project.status}">
+                                <f:selectItem itemLabel="Select Status" itemValue="" />
+                                <f:selectItem itemLabel="On-going" itemValue="On-going" />
+                                <f:selectItem itemLabel="Pending" itemValue="Pending" />
+                                <f:selectItem itemLabel="Completed" itemValue="Completed" />
+                            </p:selectOneMenu>
+
+                            <h:outputLabel for="startDate" value="Start Date:" />
+                            <p:calendar size="30" id="startDate" autocomplete="off" value="#{projectBean.project.startDate}" pattern="MM/dd/yyyy" />
+                            <h:outputLabel for="endDate" value="End Date:" />
+                            <p:calendar size="30" id="endDate" autocomplete="off" value="#{projectBean.project.endDate}" pattern="MM/dd/yyyy" />
+
+                            <h:outputLabel for="manager" value="Project Manager:" />
+                            <p:inputText size="30" id="manager" value="#{projectBean.project.manager}" required="true" />
+
+                            <h:outputLabel for="teamMembers" value="Team Members:" />
+                            <p:inputText size="30" id="teamMembers" value="#{projectBean.project.teamMembers}"  />
+
+                            <h:outputLabel for="description" value="Description:" />
+                            <p:inputTextarea cols="32" id="description" value="#{projectBean.project.description}"  />
+                        </h:panelGrid>
+                    </p:fieldset>
+
+                    <f:facet name="footer">
+                        <h:panelGroup layout="block" style="text-align:center;">
+                            <p:commandButton value="Add Project" action="#{projectBean.saveProject}" styleClass="ui-button-primary" oncomplete="PF('projectDialog').hide()" />
+                            <p:commandButton value="Cancel" onclick="PF('projectDialog').hide();" type="button" styleClass="ui-button-danger mr-2" />
+                        </h:panelGroup>
+                    </f:facet>
+
+                </p:dialog>

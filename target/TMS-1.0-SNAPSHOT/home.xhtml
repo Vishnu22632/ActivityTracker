@@ -1,0 +1,180 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>TMS - Home</title>
+        <style>
+
+            body{
+                font-family: "Gill Sans", sans-serif;
+                margin: 0;
+                padding: 0;
+            }
+
+            /* Custom styles for the panelMenu */
+            .ui-panelmenu .ui-panelmenu-header {
+                background-color: #4CAF50;
+                color: white;
+            }
+            .ui-panelmenu .ui-menuitem-link {
+                color: #333;
+                font-weight: bold;
+            }
+            .ui-button-danger {
+                background-color: #f44336;
+                border-color: #f44336;
+            }
+            .ui-button-danger:hover {
+                background-color: #d32f2f;
+                border-color: #d32f2f;
+            }
+
+
+            .main-container{
+                display: flex;
+                width: 100%;
+            }
+
+
+        </style>
+    </h:head>
+    <h:body>
+
+        <!--************************Menu************************-->
+        <ui:include src="menu.xhtml"/>
+
+
+        <div class="main-container">
+
+            <ui:include src="panelmenu.xhtml" />
+
+            <div class="rigth-row" style="width: 80%;">
+                <h:form >
+                    <p style="margin-left: 25px;  font-size: 1.8em; font-weight: bolder;" >HOME</p>
+
+                    <p:commandButton styleClass="ui-button-info" type="button" value="Welcome !!! #{userSessionBean.username}" style='font-size: 1.8em;
+                                     width: 100%;
+                                     padding: 16px;
+                                     margin-top: 0px;'  />
+
+
+                    <h:panelGroup style="display: flex; width: 100%;"  >
+
+
+                        <p:card style="width: 70%;">
+
+                            <h:form id="projectListForm"   >
+
+
+                                <p:dataTable value="#{projectBean.projects}" var="project"  id="projectTable"
+
+                                             paginator="true" rows="5" paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                             rowsPerPageTemplate="5,10,15," paginatorPosition="bottom">
+
+                                    <p:column headerText="#">
+                                        <p:cellEditor>
+                                            <f:facet name="output"><h:outputText value="#{project.id}" /></f:facet>
+                                            <f:facet name="input"><p:inputText value="#{project.id}" /></f:facet>
+                                        </p:cellEditor>
+                                    </p:column>
+
+
+                                    <p:column headerText="PROJECT NAME">
+                                        <p:cellEditor>
+                                            <f:facet name="output"><h:outputText value="#{project.name}" /></f:facet>
+                                            <f:facet name="input"><p:inputText value="#{project.name}" /></f:facet>
+                                        </p:cellEditor>
+                                    </p:column>
+
+                                    <p:column headerText="PROJECT MANAGER">
+                                        <p:cellEditor>
+                                            <f:facet name="output"><h:outputText value="#{project.manager}" /></f:facet>
+                                            <f:facet name="input"><p:inputText value="#{project.manager}" /></f:facet>
+                                        </p:cellEditor>
+                                    </p:column>
+
+
+                                    <p:column headerText="START DATE">
+                                        <p:cellEditor>
+                                            <f:facet name="output"><h:outputText value="#{project.startDate}" /></f:facet>
+                                            <f:facet name="input"><p:inputText value="#{project.startDate}" /></f:facet>
+                                        </p:cellEditor>
+                                    </p:column>
+
+                                    <p:column headerText="DUE DATE">
+                                        <p:cellEditor>
+                                            <f:facet name="output"><h:outputText value="#{project.endDate}" /></f:facet>
+                                            <f:facet name="input"><p:inputText value="#{project.endDate}" /></f:facet>
+                                        </p:cellEditor>
+                                    </p:column>
+
+                                    <p:column headerText="STATUS">
+                                        <p:cellEditor>
+                                            <f:facet name="output"><p:button styleClass="ui-button-info"  value="#{project.status}" style='width: 100px;' /></f:facet>
+                                            <f:facet name="input"><p:inputText value="#{project.status}" /></f:facet>
+                                        </p:cellEditor>
+                                    </p:column>
+
+
+
+
+                                </p:dataTable>
+
+                            </h:form>
+                        </p:card>
+
+
+
+
+
+                        <h:form class="right-row-rc" style="margin-top: 1.5em; width: 30%;"  >
+
+                            <p:panelGrid columns="1" style="font-weight: bolder; box-shadow: 0 2px 2px rgba(0, 0, 0, 0.5);" >
+
+                                <p:card style="text-align: center; width: 95%; font-size: 1.5em; margin-bottom: 5px;">
+                                    TOTAL PROJECTS 
+                                    <p:separator />
+
+                                    <!-- PrimeFaces Button -->
+                                    <p:button styleClass="ui-button-info" value="#{projectBean.totalProjects()}" style="font-size: 1.6em; width: 20%; padding: 5px;" />
+
+                                    
+                                </p:card>
+
+
+                                <p:card style="text-align: center; width: 95%; font-size: 1.5em; ">
+                                    TOTAL TASKS <p:separator /> 
+                                    <p:button styleClass="ui-button-info" value="#{projectBean.totalProjects()}" style="font-size: 1.6em; width: 20%; padding: 5px;"/>
+
+
+
+                                </p:card>
+
+
+                            </p:panelGrid>
+
+                        </h:form>
+
+
+
+
+                    </h:panelGroup>>
+
+
+
+
+
+                </h:form>
+
+
+
+            </div>
+
+        </div>
+
+    </h:body>
+</html>

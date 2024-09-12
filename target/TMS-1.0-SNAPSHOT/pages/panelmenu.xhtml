@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Panel Menu</title>
+
+        <style>
+            .nav-btn {
+                width: 40%;
+                display: block;
+                /*background-color: #111212;  Bootstrap primary color */
+                background-color: black;
+                color: #fff; /* White text color */
+                border: none; /* Remove border */
+                /*border-radius: 4px;  Rounded corners */
+                padding: 10px 10px; /* Padding inside the button */
+                margin: 5px 0; /* Margin between buttons */
+                font-size: 16px; /* Font size */
+                text-align: center; /* Center text */
+                transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transition */
+                cursor: pointer; /* Pointer cursor on hover */
+            }
+
+            .nav-btn:hover {
+                background-color: #0056b3; /* Darker shade on hover */
+                transform: scale(1.05); /* Slightly enlarge button on hover */
+            }
+
+            .nav-btn:active {
+                background-color: #004494; /* Even darker shade on click */
+                transform: scale(0.98); /* Slightly shrink button on click */
+            }
+        </style>
+
+
+    </h:head>
+    <h:body>
+
+        <div class="left-row" style="width: 18%; height: 100vh; background-color: black;">
+            <p:button value="DASHBOARD" icon="pi pi-home" outcome="home.xhtml" styleClass="nav-btn" style="background-color: black; border: none;"/>
+            <p:button value="USERS" icon="pi pi-users" outcome="user_list.xhtml" styleClass="nav-btn" style="background-color: black; border: none;"/>
+            <p:button value="PROJECTS" icon="pi pi-briefcase" outcome="projectList.xhtml" styleClass="nav-btn" style="background-color: black; border: none;"/>
+            <p:button value="TASKS" icon="pi pi-list" outcome="taskList.xhtml" styleClass="nav-btn" style="background-color: black; border: none;"/>
+            <p:button value="REPORTS" icon="pi pi-chart-line" outcome="reportPage.xhtml" styleClass="nav-btn" style="background-color: black; border: none;"/>
+        </div>
+
+
+
+
+
+
+
+
+
+
+    </h:body>
+</html>

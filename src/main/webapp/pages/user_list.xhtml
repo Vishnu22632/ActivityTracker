@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>TMS - UserList</title>
+    </h:head>
+    <h:body>
+
+        <ui:include src="menu.xhtml" />
+
+
+        <div class="main-container" style="display: flex;
+             width: 100%;">
+
+
+            <ui:include src="panelmenu.xhtml" />
+
+            <p:card style="width: 80%;">
+
+
+
+
+
+
+                <h:form>
+                    <h:panelGroup style="display: flex; justify-content: flex-end; margin-bottom: 4px;" >
+                        <p:commandButton value="Add New User" icon="pi pi-fw pi-plus"
+                                         oncomplete="PF('editUserDialog').show()"
+                                         update="editForm"
+                                         />
+                    </h:panelGroup>
+                </h:form>
+                <!--                <h:panelGroup style="display: flex; justify-content: flex-end;">
+                                    <p:button value="Add New User" icon="pi pi-fw pi-plus" outcome="signupForm.xhtml" />
+                                </h:panelGroup>-->
+
+
+
+                <h:form id="userListForm">
+
+
+                    <!--displaying message when saved-->
+                    <p:growl id="grl" showDetail="true" showSummary="true" life="2000" />
+
+                    <!--<p:growl id="message" showDetail="true"/>-->
+
+                    <p:dataTable value="#{userBean.users}" var="user" editable="true" id="userTable"
+                                 paginator="true" rows="5" paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                 rowsPerPageTemplate="5,10,15,20" paginatorPosition="bottom">
+
+                        <p:column headerText="#">
+                            <p:cellEditor>
+                                <f:facet name="output"><h:outputText value="#{user.id}" /></f:facet>
+                                <f:facet name="input"><p:inputText value="#{user.id}" /></f:facet>
+                            </p:cellEditor>
+                        </p:column>
+
+                        <p:column headerText="Full Name">
+                            <p:cellEditor>
+                                <f:facet name="output"><h:outputText value="#{user.fullName}" /></f:facet>
+                                <f:facet name="input"><p:inputText value="#{user.fullName}" /></f:facet>
+                            </p:cellEditor>
+                        </p:column>
+
+                        <p:column headerText="Email">
+                            <p:cellEditor>
+                                <f:facet name="output"><h:outputText value="#{user.email}" /></f:facet>
+                                <f:facet name="input"><p:inputText value="#{user.email}" /></f:facet>
+                            </p:cellEditor>
+                        </p:column>
+
+                        <p:column headerText="Password">
+                            <p:cellEditor>
+                                <f:facet name="output"><h:outputText value="#{user.password}" /></f:facet>
+                                <f:facet name="input"><p:inputText value="#{user.password}" /></f:facet>
+                            </p:cellEditor>
+                        </p:column>
+
+                        <p:column headerText="User Role">
+                            <p:cellEditor>
+                                <f:facet name="output"><h:outputText value="#{user.userRole}" /></f:facet>
+                                <f:facet name="input"><p:inputText value="#{user.userRole}" /></f:facet>
+                            </p:cellEditor>
+                        </p:column>
+
+                        <p:column headerText="Address">
+                            <p:cellEditor>
+                                <f:facet name="output"><h:outputText value="#{user.address}" /></f:facet>
+                                <f:facet name="input"><p:inputText value="#{user.address}" /></f:facet>
+                            </p:cellEditor>
+                        </p:column>
+
+                        <p:column headerText="Actions">
+
+                            <p:commandButton icon="pi pi-pencil" styleClass="ui-button-info mr-2" 
+                                             action="#{userBean.prepareEditUser(user)}"
+                                             oncomplete="PF('editUserDialog').show()"
+                                             update=":editForm" ajax="true" />
+
+                            <p:commandButton  icon="pi pi-trash"   action="#{userBean.deleteUser(user.id)}" update="userListForm:userTable,:userListForm:grl" style="margin-left:5px;"   styleClass="ui-button-danger " >
+                                <p:confirm header="Confirmation"  message="Do you want to delete this record?" icon="pi pi-info-circle"/>
+                            </p:commandButton>
+
+                        </p:column>
+                    </p:dataTable>
+
+                    <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" responsive="true" width="350">
+                        <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no ui-button-flat"/>
+                        <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" />
+                    </p:confirmDialog>
+
+                </h:form>
+
+                <!-- Edit User Dialog -->
+                <p:dialog header="Add Or Edit User" widgetVar="editUserDialog" modal="true" resizable="false" width="550" style="text-align: center; ">
+                    <p:separator />
+                    <h:form id="editForm">
+                        <h:panelGrid columns="2" cellpadding="5" cellspacing="5">
+
+                            <h:outputLabel for="fullName" value="Full Name : " />
+                            <p:inputText id="fullName" size="30" value="#{userBean.user.fullName}" />
+
+                            <h:outputLabel for="email" value="Email" />
+                            <p:inputText id="email" size="30" value="#{userBean.user.email}" />
+
+                            <h:outputLabel for="password" value="Password" />
+                            <p:password id="password" size="30" value="#{userBean.user.password}" />
+
+                            
+
+                            <h:outputLabel for="userRole" value="User Roles :  " />
+                            <p:selectOneMenu id="userRole" value="#{userBean.user.userRole}" style="width: 318px;">
+                                <f:selectItem itemLabel="Select Role" itemValue="" />
+                                <f:selectItems value="#{userBean.userRoles}" var="userRole"
+                                               itemLabel="#{userRole}" itemValue="#{userRole}" />
+                            </p:selectOneMenu>
+
+
+                            <h:outputLabel for="address" value="Address" />
+                            <p:inputText id="address" size="30" value="#{userBean.user.address}" />
+
+                        </h:panelGrid>
+
+                        <p:commandButton value="#{userBean.editing ? 'Update' : 'Create User'}" 
+                                         action="#{userBean.saveOrUpdateUser()}" 
+                                         oncomplete="PF('editUserDialog').hide()" 
+                                         process="@form"
+                                         update=":userListForm:userTable, :userListForm:grl"/>
+
+
+
+                    </h:form>
+                </p:dialog>
+
+            </p:card>
+
+        </div>
+
+
+
+    </h:body>
+</html>
+

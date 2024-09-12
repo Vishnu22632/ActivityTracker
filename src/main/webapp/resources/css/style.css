@@ -1,0 +1,19 @@
+/* resources/css/style.css */
+.ui-panelgrid {
+    margin: 20px;
+}
+
+.ui-panelgrid-compact {
+    margin: 0;
+}
+
+.ui-panelgrid .ui-outputlabel {
+    text-align: right;
+    padding-right: 10px;
+}
+
+.ui-panelgrid .ui-inputtext,
+.ui-panelgrid .ui-calendar,
+.ui-panelgrid .ui-inputtextarea {
+    width: 100%;
+}
